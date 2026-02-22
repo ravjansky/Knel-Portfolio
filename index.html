@@ -319,7 +319,7 @@
             display: block;
             transform: translateY(110%);
             font-family: var(--font-d);
-            font-weight: 300;
+            font-weight: 400;
             line-height: .88;
             text-transform: uppercase;
             letter-spacing: -.03em;
@@ -327,6 +327,10 @@
 
         .hero__name-inner-top {
             font-size: clamp(6rem, 15vw, 19rem);
+        }
+
+        .hero__name-inner-bottom {
+            color: var(--accent) !important;
         }
 
         /* Row 2, Column 1: tagline below "Knel" */
@@ -359,7 +363,7 @@
         }
 
         .hero-knel img {
-            height: 100%;
+            height: 110%;
             z-index: 2;
             width: auto;
             object-fit: contain;
@@ -479,7 +483,7 @@
    =================================================================== */
         .section-clip {
             position: relative;
-            z-index: 10;
+            z-index: 2;
             margin-top: -5vw;
         }
 
@@ -1086,7 +1090,7 @@
             <div class="hero-content">
                 <h1 class="hero__name">
                     <span><span class="hero__name-inner-top">Knel</span></span>
-                    <span><span class="hero__name-inner-bottom">Elgincolin</span></span>
+                    <span><span class="hero__name-inner-bottom"><em>Elgincolin</em></span></span>
                 </h1>
                 <div class="hero__bottom">
                     <p class="hero__tagline">
