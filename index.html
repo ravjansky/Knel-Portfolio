@@ -823,7 +823,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            padding: clamp(2rem, 4vw, 4rem) 0;
+            padding: clamp(2rem, 4vw, 4rem) 0 clamp(3rem, 6vw, 6rem) 0;
             overflow: hidden;
         }
 
@@ -1101,6 +1101,11 @@
             /* flatten perspective on mobile — too heavy */
             .portfolio__gallery {
                 perspective: none;
+                transform: translateY(25%) !important;
+            }
+
+            .portfolio__ui-layer {
+                transform: translateY(-15%) !important;
             }
 
             .portfolio__rotator {
@@ -1725,7 +1730,7 @@
 
         <!-- ===== PORTFOLIO — 3D gallery with TikTok embeds ===== -->
         <section id="portfolio" class="portfolio" aria-label="Portfolio">
-            <div class="portfolio__track">
+            <div class="portfolio__inner">
                 <div class="portfolio__header">
                     <span class="portfolio__overline reveal">Selected Work</span>
                 </div>
