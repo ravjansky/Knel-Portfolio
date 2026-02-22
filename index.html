@@ -860,15 +860,15 @@
             flex: 1;
             display: flex;
             align-items: center;
-            perspective: 2000px;
+            perspective: 8000px;
             perspective-origin: 50% 50%;
             overflow: visible;
         }
 
         /* rotator — slight wall angle + mouse parallax on desktop */
         .portfolio__rotator {
-            transform-style: preserve-3d;
-            transform: rotateY(-14deg) rotateX(0deg);
+            transform-style: preserve-3d !important;
+            transform: rotateY(-25deg) rotateX(0deg) !important;
             transition: transform .8s var(--ease-o);
             display: flex;
             align-items: center;
@@ -880,7 +880,7 @@
             align-items: flex-start;
             gap: clamp(10rem, 15vw, 15rem);
             /* start middle, end middle */
-            padding: clamp(1rem, 2vw, 2rem) 50vw;
+            padding: clamp(1rem, 2vw, 2rem) 40vw;
         }
 
         /* each video card — tighter sizing with gallery shadow */
@@ -1006,6 +1006,18 @@
             width: 100%;
             height: 100%;
             z-index: 2;
+            pointer-events: none;
+        }
+
+        .portfolio__ui-layer::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background: linear-gradient(to right,
+                    rgba(242, 239, 233, 0.7) 0%,
+                    rgba(242, 239, 233, 0) 70%);
+
             pointer-events: none;
         }
 
@@ -2326,17 +2338,25 @@
 
                 // --- scroll distance: last card lands centered ---
                 function getScrollDistance() {
-                    const trackWidth = track.scrollWidth;
                     const viewWidth = section.offsetWidth;
                     const lastCard = cards[cardCount - 1];
-                    const lastCardWidth = lastCard.offsetWidth;
-                    return Math.max(0, trackWidth - viewWidth);
+
+                    const trackRect = track.getBoundingClientRect();
+                    const lastCardRect = lastCard.getBoundingClientRect();
+
+                    // distance from left edge of track to center of last card
+                    const lastCardCenter = (lastCard.offsetLeft + lastCard.offsetWidth / 2);
+
+                    // we want that center aligned with center of viewport
+                    const targetOffset = lastCardCenter - viewWidth / 2;
+
+                    return Math.max(0, targetOffset);
                 }
 
                 let scrollDist = getScrollDistance();
 
                 // update active UI text based on scroll position
-                function updateActiveText(scrollX) {
+                function updateActiveText() {
                     const viewWidth = section.offsetWidth;
                     // which card's center is closest to 50% of the screen center
                     let activeIndex = 0;
@@ -2367,7 +2387,7 @@
                     scrollTrigger: {
                         trigger: section,
                         start: 'top top',
-                        end: () => `+=${scrollDist * 1.5}`,
+                        end: () => `+=${scrollDist}`,
                         pin: true,
                         scrub: 1,
                         anticipatePin: 1,
